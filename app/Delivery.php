@@ -11,11 +11,11 @@ class Delivery extends Model
 
     public function vehicle()
     {
-      return $this->hasOne('App\Vehicle','id');//clase, clave foranea
+      return $this->hasOne('App\Vehicle','id','vehicle_id');//clase, primaria, clave foranea
     }
 
     public function device()
     {
-      return $this->hasOne('App\Device','id');
+      return $this->hasOne('App\Device','id','device_id');
     }
 }
