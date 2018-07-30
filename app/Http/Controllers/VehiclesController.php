@@ -10,7 +10,7 @@ class VehiclesController extends Controller
     //
     public function store()
     {
-      
+
 
     }
 
@@ -19,5 +19,14 @@ class VehiclesController extends Controller
     	$vehicles = \App\Vehicle::all();
 
     	return view('Vehicles.index')->with(['vehicles'=>$vehicles]);
+    }
+
+    public function getActiveVehicles()
+    {
+        $activeDeliveries = \App\Delivery::active()->get();
+
+        return view('Vehicles.list_active')->with([
+    		'activeDeliveries'=>$activeDeliveries
+    	]);
     }
 }

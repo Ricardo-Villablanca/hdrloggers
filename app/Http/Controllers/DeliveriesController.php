@@ -56,4 +56,13 @@ else
     		'devices'=>$devices,
     	]);
     }
+
+    public function getActiveDeliveries()
+    {
+        $activeDeliveries = \App\Delivery::active()->get();
+
+        return view('Deliveries.list_active')->with([
+    		'activeDeliveries'=>$activeDeliveries
+    	]);
+    }
 }

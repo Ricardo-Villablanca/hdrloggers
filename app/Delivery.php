@@ -6,16 +6,31 @@ use Illuminate\Database\Eloquent\Model;
 
 class Delivery extends Model
 {
-    //
+    //eliminar campos created_at y modified_at
     public $timestamps = false;
 
+    //relacion con los camiones
     public function vehicle()
     {
       return $this->hasOne('App\Vehicle','id','vehicle_id');//clase, primaria, clave foranea
     }
 
+    //relacion con los dispositivos
     public function device()
     {
       return $this->hasOne('App\Device','id','device_id');
+    }
+
+    //obtener los viajes que se estan realizando
+    public function scopeActive($query)
+    {
+        return $query->where('end_date',null);
+    }
+
+    //crear un mutador (campo virtual) para obtener el nombre
+    //del viaje
+    public function getServiceNameAttribute()
+    {
+        return $this->attributes['start_loc'] . ' - ' . $this->attributes['end_loc'];
     }
 }
