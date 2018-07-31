@@ -8,20 +8,7 @@ use \App\Device;
 
 class DeliveriesController extends Controller
 {
-    //
-/*$ndel = new App\Delivery;
-$ndel->pstart =  $request->pstart;
-$ndel->pend =  $request->pend;
-$ndel->dstart =  $request->dstart;
-$ndel->dend =  $request->dend;
-$ndel->Nvehicle =  $request->Nvehicle;
-$ndel->Ndisp =  $request->Ndisp;
 
-if($record->save())
-  return "recibido!";
-else
-  return "no recibido";
-*/
     public function fetch()
     {
     	$deliveries = \App\Delivery::all();
@@ -57,14 +44,6 @@ else
     	]);
     }
 
-    public function getActiveDeliveries()
-    {
-        $activeDeliveries = \App\Delivery::active()->get();
-
-        return view('Deliveries.list_active')->with([
-    		'activeDeliveries'=>$activeDeliveries
-    	]);
-    }
 
     public function fillDeliveryData($device_id)
     {
@@ -78,23 +57,27 @@ else
         ]);
     }
 
-    public function edit(Request $request)
+    public function setDeliveryData(Request $request)
     {
         $delivery = \App\Delivery::where('id',$request->id)->first();
-
-        $delivery->start_loc       = $request->start_loc;
-        $delivery->end_loc         = $request->end_loc;
-        $delivery->vehicle_id      = $request->vehicle_id;
+        $device   = \App\Device::where('id',$delivery->device_id)->first();
 
         try
         {
-            $delivery->save();
 
-            echo 'SUCCESS';
+            $delivery->start_loc       = $request->start_loc;
+            $delivery->end_loc         = $request->end_loc;
+            $delivery->vehicle_id      = $request->vehicle_id;
+            $device->working           = 1;
+
+            $delivery->save();
+            $device->save();
+
+            return redirect('monitoring')->with('message', 'SUCCESS');
         }
         catch(\Exception $e)
         {
-
+            echo $e->getMessage();
         }
     }
 }

@@ -21,12 +21,4 @@ class VehiclesController extends Controller
     	return view('Vehicles.index')->with(['vehicles'=>$vehicles]);
     }
 
-    public function getActiveVehicles()
-    {
-        $activeDeliveries = \App\Delivery::active()->get();
-
-        return view('Vehicles.list_active')->with([
-    		'activeDeliveries'=>$activeDeliveries
-    	]);
-    }
 }

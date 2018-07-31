@@ -8,12 +8,6 @@ class DevicesController extends Controller
 {
     //
 
-    public function getActiveDevices()
-    {
-        $activeDevices = \App\Device::active()->get();
-
-        return view('Devices.list_active')->with(['activeDevices' => $activeDevices]);
-    }
 
     public function setDevice(Request $request)
     {
@@ -94,11 +88,6 @@ class DevicesController extends Controller
 
     }
 
-    public function listNotWorking()
-    {
-        $devices = \App\Device::notWorking()->get();
 
-        return view('Devices.list_not_working')->with(['devices'=>$devices]);
-    }
 
 }

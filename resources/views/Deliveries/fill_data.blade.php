@@ -1,6 +1,6 @@
 @if($delivery)
 
-    <form action="{{ route('deliveries-edit') }}" method="get">
+    <form action="{{ route('set-delivery-data') }}" method="get">
         <fieldset>
             <legend>ALTA DE SERVICIO</legend>
             <input type="hidden" name="id" value={{ $delivery->id }} >

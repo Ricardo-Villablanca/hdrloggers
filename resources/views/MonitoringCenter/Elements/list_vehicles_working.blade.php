@@ -5,5 +5,5 @@ CAMIONES ACTIVOS <br>
         {{ $delivery->vehicle->name }} <br>
     @endforeach
 @else
-    No hay camiones activos
+    No hay camiones activos <br>
 @endif

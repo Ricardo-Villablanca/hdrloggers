@@ -10,9 +10,9 @@ class Device extends Model
     public $timestamps = false;
     // obtener los dispositivos que estan encendidos
     // pero no tienen datos asociados
-    public function scopeActive($query)
+    public function scopeWorking($query)
     {
-        return $query->where('active',1);
+        return $query->where('working',1)->where('active',1);
     }
 
     // obtener los dispositivos que estan funcionando

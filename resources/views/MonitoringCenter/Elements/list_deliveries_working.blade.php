@@ -5,5 +5,5 @@ SERVICIOS ACTIVOS <br>
         {{ $delivery->service_name }} <br>
     @endforeach
 @else
-    No hay viajes activos
+    No hay viajes activos <br>
 @endif

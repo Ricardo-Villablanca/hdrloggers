@@ -22,9 +22,9 @@ class Delivery extends Model
     }
 
     //obtener los viajes que se estan realizando
-    public function scopeActive($query)
+    public function scopeWorking($query)
     {
-        return $query->where('end_date',null);
+        return $query->where('end_date',null)->where('start_loc','!=',null);
     }
 
     //crear un mutador (campo virtual) para obtener el nombre
