@@ -48,7 +48,7 @@ class DeliveriesController extends Controller
     public function fillDeliveryData($device_id)
     {
 
-        $delivery = \App\Delivery::where('device_id',$device_id)->first();
+        $delivery = \App\Delivery::emptyData()->where('device_id',$device_id)->first();
         $vehicles = \App\Vehicle::all();
 
         return view('Deliveries.fill_data')->with([

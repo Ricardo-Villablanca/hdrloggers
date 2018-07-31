@@ -27,6 +27,16 @@ class Delivery extends Model
         return $query->where('end_date',null)->where('start_loc','!=',null);
     }
 
+    //obtener los viajes que se estan realizando
+    public function scopeEmptyData($query)
+    {
+        return $query
+        ->where('end_date',null)
+        ->where('start_loc',null)
+        ->where('end_loc',null)
+        ->where('vehicle_id',null);
+    }
+
     //crear un mutador (campo virtual) para obtener el nombre
     //del viaje
     public function getServiceNameAttribute()
