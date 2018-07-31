@@ -16,7 +16,8 @@
         </style>
     </head>
     <body>
+        @yield('content')
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        @yield('scripts')    
+        @yield('scripts')
     </body>
 </html>

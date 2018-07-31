@@ -1,41 +1,43 @@
 @extends('Layouts.app')
-@isset($current_delivery )
-    <h1 style="text-align:center">{{ $current_delivery->service_name }}</h1>
-    <h3 style="text-align:center; color: #777">
-        Camion: {{ $current_delivery->vehicle->name }} |
-        Dispositivo:  {{ $current_delivery->device->name }}
-    </h3>
-@endisset
+@section('content')
+
+    @isset($current_delivery )
+        <h1 style="text-align:center">{{ $current_delivery->service_name }}</h1>
+        <h3 style="text-align:center; color: #777">
+            Camion: {{ $current_delivery->vehicle->name }} |
+            Dispositivo:  {{ $current_delivery->device->name }}
+        </h3>
+    @endisset
 
 
-@if(session()->has('message'))
-    {{ session()->get('message') }}
-@endif
-<br>
-
-<select name="switch" id="switch">
-    <option value="menu1">Servicios</option>
-    <option value="menu2">Camiones</option>
-    <option value="menu3">Dispositivos</option>
-</select>
-<button id="changeMenu">Ver</button>
-
-<div data-menu="menu1" >
-    @include('MonitoringCenter.Elements.list_deliveries_working',['activeDeliveries'=>$activeDeliveries])
+    @if(session()->has('message'))
+        {{ session()->get('message') }}
+    @endif
     <br>
-</div>
-<div data-menu="menu3" class="menu-item">
-    @include('MonitoringCenter.Elements.list_devices_working',['activeDevices'=>$activeDevices])
-    <br>
-</div>
-<div data-menu="menu3" class="menu-item">
 
-    @include('MonitoringCenter.Elements.list_devices_not_working',['devicesNotWorking'=>$devicesNotWorking])
-    <br>
-</div>
-<div data-menu="menu2" class="menu-item">
-    @include('MonitoringCenter.Elements.list_vehicles_working',['activeDeliveries'=>$activeDeliveries])
-</div>
+    <select name="switch" id="switch">
+        <option value="menu1">Servicios</option>
+        <option value="menu2">Camiones</option>
+        <option value="menu3">Dispositivos</option>
+    </select>
+    <button id="changeMenu">Ver</button>
+
+    <div data-menu="menu1" >
+        @include('MonitoringCenter.Elements.list_deliveries_working',['activeDeliveries'=>$activeDeliveries])
+        <br>
+    </div>
+    <div data-menu="menu3" class="menu-item">
+        @include('MonitoringCenter.Elements.list_devices_working',['activeDevices'=>$activeDevices])
+        <br>
+    </div>
+    <div data-menu="menu3" class="menu-item">
+
+        @include('MonitoringCenter.Elements.list_devices_not_working',['devicesNotWorking'=>$devicesNotWorking])
+        <br>
+    </div>
+    <div data-menu="menu2" class="menu-item">
+        @include('MonitoringCenter.Elements.list_vehicles_working',['activeDeliveries'=>$activeDeliveries])
+    </div>
     @isset($records)
         @isset($current_delivery)
 
@@ -46,6 +48,7 @@
             </div>
         @endisset
     @endisset
+@endsection
 
 @section('scripts')
     <script>
