@@ -28,4 +28,6 @@ Route::get('fill-delivery-data/{id}','DeliveriesController@fillDeliveryData')->n
 
 Route::get('deliveries/set-delivery-data','DeliveriesController@setDeliveryData')->name('set-delivery-data');
 
-Route::get('monitoring','MonitoringCenterController@index')->name('monitoring-center');
+Route::get('monitoring/','MonitoringCenterController@index')->name('monitoring-center');
+Route::get('monitoring/{delivery_id}','MonitoringCenterController@index')->name('monitoring-center-for');
+Route::get('monitoring-device/{device_id}','MonitoringCenterController@device')->name('monitoring-center-for-device');

@@ -21,4 +21,5 @@ class Device extends Model
     {
         return $query->where('working',0)->where('active',1);
     }
+
 }

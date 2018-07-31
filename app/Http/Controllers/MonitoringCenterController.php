@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use \App\Vehicle;
 use \App\Device;
 use \App\Delivery;
+use \App\Record;
 
 class MonitoringCenterController extends Controller
 {
@@ -43,16 +44,39 @@ class MonitoringCenterController extends Controller
     //     ]);
     // }
 
-    public function index()
+    public function index( $delivery_id = null)
     {
         $activeDeliveries = \App\Delivery::working()->get();
         $devicesNotWorking = \App\Device::notWorking()->get();
         $devices = \App\Device::working()->get();
 
-        return view('MonitoringCenter.index')->with([
+
+        $data = [
             'activeDeliveries'=>$activeDeliveries,
             'devicesNotWorking'=>$devicesNotWorking,
             'activeDevices'=>$devices
-        ]);
+        ];
+
+        if($delivery_id)
+        {
+
+            $records = \App\Record::where('delivery_id',$delivery_id)->get();
+            $data['records'] = $records;
+            $del = \App\Delivery::working()->where('id',$delivery_id)->first();
+            $data['current_delivery'] = $del;
+        }
+
+        return view('MonitoringCenter.index')->with($data);
     }
+
+    public function device( $device_id = null )
+    {
+        if( $device_id )
+        {
+            $deliveryForDevice = \App\Delivery::working()->where('device_id',$device_id)->first();
+            return redirect()->route('monitoring-center-for',['delivery_id'=>$deliveryForDevice->id]);
+
+        }
+    }
+
 }
