@@ -65,4 +65,36 @@ else
     		'activeDeliveries'=>$activeDeliveries
     	]);
     }
+
+    public function fillDeliveryData($device_id)
+    {
+
+        $delivery = \App\Delivery::where('device_id',$device_id)->first();
+        $vehicles = \App\Vehicle::all();
+
+        return view('Deliveries.fill_data')->with([
+            'delivery'=> $delivery,
+            'vehicles'=> $vehicles
+        ]);
+    }
+
+    public function edit(Request $request)
+    {
+        $delivery = \App\Delivery::where('id',$request->id)->first();
+
+        $delivery->start_loc       = $request->start_loc;
+        $delivery->end_loc         = $request->end_loc;
+        $delivery->vehicle_id      = $request->vehicle_id;
+
+        try
+        {
+            $delivery->save();
+
+            echo 'SUCCESS';
+        }
+        catch(\Exception $e)
+        {
+
+        }
+    }
 }

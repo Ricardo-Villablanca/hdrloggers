@@ -33,4 +33,9 @@ class Delivery extends Model
     {
         return $this->attributes['start_loc'] . ' - ' . $this->attributes['end_loc'];
     }
+
+    public function scopeActiveForDevice($query, $device_name)
+    {
+        return $query->where('device.name',$device_name);
+    }
 }

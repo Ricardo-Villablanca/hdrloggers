@@ -22,5 +22,13 @@ Route::get('deliveries/add','DeliveriesController@form')->name('deliveries');
 Route::get('deliveries/store','DeliveriesController@store')->name('delivery_store');
 
 Route::get('devices/active','DevicesController@getActiveDevices');
+Route::get('devices/not-working','DevicesController@listNotWorking');
 Route::get('deliveries/active','DeliveriesController@getActiveDeliveries');
 Route::get('vehicles/active','VehiclesController@getActiveVehicles');
+
+
+Route::get('set-device','DevicesController@setDevice');
+Route::get('set-device-off','DevicesController@setDeviceOff');
+Route::get('fill-delivery-data/{id}','DeliveriesController@fillDeliveryData')->name('fill-delivery-data');
+
+Route::get('deliveries/edit','DeliveriesController@edit')->name('deliveries-edit');
